@@ -5,14 +5,13 @@ import os
 import re
 import sys
 import requests
-import urllib.parse
 
 # ======================
-# Telegram 通知
+# Telegram 推送（纯文本）
 # ======================
 def tg_send(message: str):
     """
-    Telegram 纯文本通知（不使用 HTML / Markdown）
+    Telegram 纯文本通知（不设置 parse_mode）
     """
     bot_token = os.getenv("TG_BOT_TOKEN")
     chat_id = os.getenv("TG_CHAT_ID")
@@ -25,8 +24,7 @@ def tg_send(message: str):
 
     payload = {
         "chat_id": chat_id,
-        "text": message[:4000],  # Telegram 单条限制保护
-        "parse_mode": None       # 强制纯文本
+        "text": message[:4000]
     }
 
     try:
